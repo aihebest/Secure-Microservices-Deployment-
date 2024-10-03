@@ -21,6 +21,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: ./microservices/sample-app
+        context: ./sample-app
+        file: ./sample-app/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/sample-app:latest,${{ secrets.DOCKER_USERNAME }}/sample-app:${{ github.sha }}

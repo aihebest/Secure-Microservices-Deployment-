@@ -1,23 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-app
+  name: sample-microservice
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: sample-app
+      app: sample-microservice
   template:
     metadata:
       labels:
-        app: sample-app
+        app: sample-microservice
     spec:
       containers:
-      - name: sample-app
-        image: aihebest/sample-app:v1
+      - name: sample-microservice
+        image: your-docker-registry/sample-microservice:v1
         ports:
         - containerPort: 3000
-
-env:
-  - name: PORT
-    value: "3000"

@@ -17,3 +17,7 @@ spec:
         image: aihebest/sample-app:v1
         ports:
         - containerPort: 3000
+
+env:
+  - name: PORT
+    value: "3000"

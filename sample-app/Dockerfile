@@ -15,3 +15,5 @@ COPY --chown=node:node --from=builder /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=builder /usr/src/app/app.js ./app.js
 EXPOSE 3000
 CMD ["dumb-init", "node", "app.js"]
+
+ENV PORT=3000

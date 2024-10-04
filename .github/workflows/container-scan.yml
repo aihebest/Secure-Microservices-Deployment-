@@ -31,7 +31,7 @@ jobs:
     - name: Run ESLint
       run: |
         cd sample-app
-        npx eslint .
+        npx eslint --fix .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master

@@ -1,12 +1,18 @@
-const express = require('express');
-
-const app = express();
-const port = 3000;
-
-app.get('/', (req, res) => {
-  res.send('Hello from the Secure Microservices Deployment Pipeline!');
-});
-
-app.listen(port, () => {
-  console.log(`Sample app listening at http://localhost:${port}`);
-});
+{
+  "name": "sample-app",
+  "version": "1.0.0",
+  "description": "Sample app for Secure Microservices Deployment Pipeline",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}

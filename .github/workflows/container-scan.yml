@@ -17,12 +17,6 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Verify package.json
-      run: |
-        cd sample-app
-        ls -la
-        cat package.json
-
     - name: Install dependencies
       run: |
         cd sample-app
@@ -34,9 +28,9 @@ jobs:
         npx eslint --fix .
 
     - name: Build Docker image for scanning
-        run: |
-          cd sample-app
-          docker build -t sample-app:test .
+      run: |
+        cd sample-app
+        docker build -t sample-app:test .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
@@ -64,6 +58,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: ./sample-app
-        file: ./sample-app/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/sample-app:latest,${{ secrets.DOCKER_USERNAME }}/sample-app:${{ github.sha }}

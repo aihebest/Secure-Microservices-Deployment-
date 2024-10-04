@@ -17,10 +17,16 @@ jobs:
       with:
         node-version: '14'
 
+    - name: Verify package.json
+      run: |
+        cd sample-app
+        ls -la
+        cat package.json
+
     - name: Install dependencies
       run: |
         cd sample-app
-        npm ci
+        npm install
 
     - name: Run ESLint
       run: |

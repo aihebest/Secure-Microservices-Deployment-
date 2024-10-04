@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-app
+  name: sample-app-deployment  # Add this line if it's not present
+  namespace: default
 spec:
   replicas: 3
   selector:
@@ -11,9 +12,13 @@ spec:
     metadata:
       labels:
         app: sample-app
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "3000"
     spec:
       containers:
       - name: sample-app
-        image: aihebest/sample-app:v1
+        image: aihebest/sample-app:latest
         ports:
         - containerPort: 3000

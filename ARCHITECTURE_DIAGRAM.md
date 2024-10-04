@@ -7,6 +7,9 @@ graph TD
     Git -->|Detect Changes| ArgoCD[ArgoCD]
     ArgoCD -->|Sync| EKS[Amazon EKS]
     EKS -->|Deploy| App[Sample App]
-    EKS -->|Collect Metrics| Prom[Prometheus]
+    App -->|Expose Metrics| Prom[Prometheus]
+    Prom -->|Collect Metrics| Prom
     Prom -->|Visualize| Grafana[Grafana Dashboards]
+    Prom -->|Trigger Alerts| AlertManager[Alertmanager]
+    AlertManager -->|Send Notifications| Notify[Email/Slack]
     EKS -->|Enforce| NP[Network Policies]

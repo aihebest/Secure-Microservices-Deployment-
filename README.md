@@ -10,6 +10,7 @@ This project demonstrates a secure, scalable microservices deployment pipeline u
 - GitOps with ArgoCD
 - Security scanning with Trivy
 - Monitoring with Prometheus and Grafana
+- Alerting with Prometheus Alertmanager
 - Network policies for enhanced security
 
 ## Architecture
@@ -20,7 +21,8 @@ The project uses a microservices architecture deployed on Amazon EKS. It incorpo
 - GitHub Actions for CI/CD
 - ArgoCD for GitOps-based deployments
 - Kubernetes for orchestration
-- Prometheus and Grafana for monitoring
+- Prometheus and Grafana for monitoring and visualization
+- Prometheus Alertmanager for alerting
 - Trivy for vulnerability scanning
 
 ## Getting Started
@@ -31,9 +33,19 @@ The project uses a microservices architecture deployed on Amazon EKS. It incorpo
 4. Configure GitHub Actions secrets
 5. Push changes to trigger the pipeline
 
-## Monitoring
+## Monitoring and Alerting
 
-The project uses Prometheus for metrics collection and Grafana for visualization. Custom dashboards are available for monitoring the sample application.
+The project uses Prometheus for metrics collection, Grafana for visualization, and Alertmanager for notifications. Custom dashboards are available for monitoring the sample application.
+
+Key metrics monitored:
+- HTTP request duration
+- Total HTTP requests
+- Error rates
+
+Alerts are configured for:
+- High request latency
+- High error rates
+- Frequent pod restarts
 
 ## Security
 
@@ -47,6 +59,8 @@ Security is a key focus, with:
 - Implement ELK stack for logging
 - Add more microservices
 - Implement service mesh with Istio
+- Fine-tune alerting thresholds
+- Implement auto-scaling based on metrics
 
 ```mermaid
 graph TD
@@ -57,6 +71,9 @@ graph TD
     Git -->|Detect Changes| ArgoCD[ArgoCD]
     ArgoCD -->|Sync| EKS[Amazon EKS]
     EKS -->|Deploy| App[Sample App]
-    EKS -->|Collect Metrics| Prom[Prometheus]
+    App -->|Expose Metrics| Prom[Prometheus]
+    Prom -->|Collect Metrics| Prom
     Prom -->|Visualize| Grafana[Grafana Dashboards]
+    Prom -->|Trigger Alerts| AlertManager[Alertmanager]
+    AlertManager -->|Send Notifications| Notify[Email/Slack]
     EKS -->|Enforce| NP[Network Policies]

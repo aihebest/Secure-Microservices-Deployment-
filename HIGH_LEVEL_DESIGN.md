@@ -8,6 +8,7 @@ This project implements a secure, scalable microservices deployment pipeline, sh
 
 1. **Microservice Application**
    - Containerized Node.js application
+   - Exposes Prometheus metrics
    - Deployed as Kubernetes pods
 
 2. **Version Control and CI/CD**
@@ -32,6 +33,11 @@ This project implements a secure, scalable microservices deployment pipeline, sh
 6. **Monitoring and Observability**
    - Prometheus for metrics collection
    - Grafana for metrics visualization and dashboards
+   - Custom dashboards for application-specific metrics
+
+7. **Alerting**
+   - Prometheus Alertmanager for alert management and notifications
+   - Configured alerts for high latency, error rates, and pod restarts
 
 ## Data Flow
 
@@ -43,8 +49,9 @@ This project implements a secure, scalable microservices deployment pipeline, sh
 3. ArgoCD detects changes in Git repository
 4. ArgoCD syncs changes to EKS cluster
 5. Application pods updated in EKS
-6. Prometheus continually scrapes metrics
-7. Grafana displays metrics in dashboards
+6. Prometheus continually scrapes metrics from application
+7. Grafana displays metrics in custom dashboards
+8. Alertmanager sends notifications based on alert rules
 
 ## Security Measures
 
@@ -58,3 +65,11 @@ This project implements a secure, scalable microservices deployment pipeline, sh
 - EKS provides scalable, managed Kubernetes
 - Microservices architecture allows independent scaling
 - GitOps ensures reliability and reproducibility of deployments
+- Monitoring and alerting enable quick response to issues
+
+## Monitoring and Alerting Strategy
+
+- Key metrics: HTTP request duration, total requests, error rates
+- Custom Grafana dashboards for visualizing application health
+- Alerting on high latency, high error rates, and frequent pod restarts
+- Alertmanager configured to send notifications (e.g., email, Slack)

@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "description": "Sample app for Secure Microservices Deployment Pipeline",
   "main": "app.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "start": "node app.js",
     "lint": "eslint ."
   },
   "dependencies": {
-    "ansi-regex": "^6.1.0",
-    "express": "^4.17.1",
-    "http-cache-semantics": "^4.1.1",
-    "semver": "^7.6.3"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

@@ -34,9 +34,9 @@ jobs:
         npx eslint --fix .
 
     - name: Build Docker image for scanning
-         run:
-            cd sample-app
-            docker build -t sample-app:test .
+        run: |
+          cd sample-app
+          docker build -t sample-app:test .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
